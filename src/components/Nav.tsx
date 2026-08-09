@@ -8,13 +8,14 @@ export function Nav() {
   const active = useActiveSection(SECTION_IDS)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-canvas/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line bg-canvas/85 backdrop-blur-md">
       <nav className="mx-auto flex h-14 max-w-3xl items-center justify-between gap-4 px-6">
         <a
           href="#about"
-          className="shrink-0 text-sm font-medium tracking-tight hover:text-ink-muted"
+          className="shrink-0 font-mono text-sm font-medium tracking-tight hover:text-gv-yellow"
         >
-          {profile.name}
+          <span className="text-gv-orange select-none">~/</span>
+          {profile.name.toLowerCase().replace(/\s+/g, '-')}
         </a>
 
         <div className="flex items-center gap-1">
@@ -24,9 +25,9 @@ export function Nav() {
                 <a
                   href={`#${section.id}`}
                   aria-current={active === section.id ? 'true' : undefined}
-                  className={`rounded-md px-2.5 py-1.5 text-sm transition-colors ${
+                  className={`rounded-md px-2.5 py-1.5 font-mono text-sm lowercase transition-colors ${
                     active === section.id
-                      ? 'bg-surface text-ink'
+                      ? 'bg-surface text-gv-aqua'
                       : 'text-ink-muted hover:bg-surface hover:text-ink'
                   }`}
                 >

@@ -4,32 +4,59 @@
    so the light/dark/system toggle can override the OS preference. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * Gruvbox — dark (hard) and its light companion.
+ * Hues are used like syntax highlighting, one job each:
+ *   aqua   → section labels        green  → entry titles
+ *   blue   → links                 purple → dates and other metadata
+ *   orange → primary actions       yellow → emphasis
+ *   red    → tag palette only
+ */
+
 :root {
   color-scheme: light;
 
-  --canvas: #ffffff;
-  --surface: #f7f7f5;
-  --surface-hover: #efefed;
-  --ink: #37352f;
-  --ink-muted: #6b6a66;
-  --ink-faint: #9b9a97;
-  --line: #e9e9e7;
-  --accent: #2383e2;
-  --accent-soft: rgba(35, 131, 226, 0.1);
+  --canvas: #f9f5d7; /* bg0_h */
+  --surface: #f2e5bc; /* bg0_s */
+  --surface-hover: #ebdbb2; /* bg1 */
+  --line: #e4d5a5;
+  --ink: #282828; /* fg0 */
+  --ink-muted: #504945; /* fg2 */
+  --ink-faint: #7c6f64; /* fg4 */
+
+  /* Faded variants — the light theme's darker hues. */
+  --gv-red: #9d0006;
+  --gv-green: #79740e;
+  --gv-yellow: #b57614;
+  --gv-blue: #076678;
+  --gv-purple: #8f3f71;
+  --gv-aqua: #427b58;
+  --gv-orange: #af3a03;
+
+  --accent-soft: rgba(175, 58, 3, 0.14);
 }
 
 .dark {
   color-scheme: dark;
 
-  --canvas: #191919;
-  --surface: #202020;
-  --surface-hover: #2a2a2a;
-  --ink: #e6e6e4;
-  --ink-muted: #a3a29e;
-  --ink-faint: #7f7f7d;
-  --line: #2f2f2f;
-  --accent: #5b9ee6;
-  --accent-soft: rgba(91, 158, 230, 0.14);
+  --canvas: #1d2021; /* bg0_h */
+  --surface: #282828; /* bg0 */
+  --surface-hover: #32302f; /* bg0_s */
+  --line: #3c3836; /* bg1 */
+  --ink: #ebdbb2; /* fg1 */
+  --ink-muted: #bdae93; /* fg3 */
+  --ink-faint: #928374; /* gray */
+
+  /* Bright variants — the dark theme's saturated hues. */
+  --gv-red: #fb4934;
+  --gv-green: #b8bb26;
+  --gv-yellow: #fabd2f;
+  --gv-blue: #83a598;
+  --gv-purple: #d3869b;
+  --gv-aqua: #8ec07c;
+  --gv-orange: #fe8019;
+
+  --accent-soft: rgba(254, 128, 25, 0.18);
 }
 
 /* `inline` keeps the utilities pointing at the custom properties themselves,
@@ -38,16 +65,25 @@
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
+  --color-line: var(--line);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-ink-faint: var(--ink-faint);
-  --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
+
+  --color-gv-red: var(--gv-red);
+  --color-gv-green: var(--gv-green);
+  --color-gv-yellow: var(--gv-yellow);
+  --color-gv-blue: var(--gv-blue);
+  --color-gv-purple: var(--gv-purple);
+  --color-gv-aqua: var(--gv-aqua);
+  --color-gv-orange: var(--gv-orange);
 
   --font-sans:
     ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono:
+    ui-monospace, 'SF Mono', SFMono-Regular, 'JetBrains Mono', Menlo, Consolas,
+    monospace;
 }
 
 @layer base {
@@ -69,14 +105,61 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--gv-orange);
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
 
+/* --- Side icon clouds -------------------------------------------------- */
+
+@keyframes cloud-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* Two nested transforms on purpose: the wrapper owns the looping drift, the
+   glyph owns rotation and scale, so hover can retarget one without
+   cancelling the other. */
+.cloud-float {
+  animation-name: cloud-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.cloud-glyph {
+  transform: rotate(var(--rot)) scale(var(--scl));
+  opacity: var(--opa);
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease;
+}
+
+.cloud-item:hover .cloud-glyph {
+  transform: rotate(0deg) scale(calc(var(--scl) * 1.3));
+  opacity: 1;
+}
+
+.cloud-label {
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.cloud-item:hover .cloud-label {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .cloud-float {
+    animation: none;
   }
 }

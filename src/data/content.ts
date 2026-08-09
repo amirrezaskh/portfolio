@@ -1,7 +1,14 @@
+import type { ComponentType } from 'react'
+import { GraduationCap } from 'lucide-react'
+import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
+
 /**
  * All page copy lives here so the components stay pure layout.
  * Everything below is placeholder — swap in the real details.
  */
+
+/** Anything that renders an icon at a caller-supplied size. */
+export type IconComponent = ComponentType<{ className?: string }>
 
 export const profile = {
   name: 'Amirreza Sokhankhosh',
@@ -18,10 +25,20 @@ export const profile = {
   ],
 }
 
-export const socials = [
-  { label: 'GitHub', href: 'https://github.com/' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/' },
-  { label: 'Google Scholar', href: 'https://scholar.google.com/' },
+export type Social = {
+  label: string
+  href: string
+  icon: IconComponent
+}
+
+export const socials: Social[] = [
+  { label: 'GitHub', href: 'https://github.com/', icon: GithubIcon },
+  { label: 'LinkedIn', href: 'https://linkedin.com/', icon: LinkedinIcon },
+  {
+    label: 'Google Scholar',
+    href: 'https://scholar.google.com/',
+    icon: GraduationCap,
+  },
 ]
 
 export type Experience = {
@@ -66,7 +83,10 @@ export type Project = {
   description: string
   year: string
   tags: string[]
+  /** Where the title links to. */
   href?: string
+  repoUrl?: string
+  liveUrl?: string
 }
 
 export const projects: Project[] = [
@@ -77,6 +97,8 @@ export const projects: Project[] = [
     year: '2025',
     tags: ['React', 'Vite'],
     href: '#',
+    repoUrl: 'https://github.com/',
+    liveUrl: '#',
   },
   {
     name: 'Project Two',
@@ -84,6 +106,7 @@ export const projects: Project[] = [
     year: '2024',
     tags: ['Python', 'FastAPI'],
     href: '#',
+    repoUrl: 'https://github.com/',
   },
   {
     name: 'Project Three',
@@ -91,6 +114,7 @@ export const projects: Project[] = [
     year: '2024',
     tags: ['Rust'],
     href: '#',
+    repoUrl: 'https://github.com/',
   },
   {
     name: 'Project Four',
@@ -98,6 +122,7 @@ export const projects: Project[] = [
     year: '2023',
     tags: ['TypeScript'],
     href: '#',
+    liveUrl: '#',
   },
 ]
 

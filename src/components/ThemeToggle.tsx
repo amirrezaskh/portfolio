@@ -29,7 +29,7 @@ export function ThemeToggle() {
             onClick={() => setTheme(value)}
             className={`grid size-7 place-items-center rounded-full transition-colors ${
               active
-                ? 'bg-canvas text-ink shadow-sm'
+                ? 'bg-canvas text-gv-yellow shadow-sm'
                 : 'text-ink-faint hover:text-ink-muted'
             }`}
           >
