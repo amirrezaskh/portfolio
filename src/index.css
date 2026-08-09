@@ -138,6 +138,15 @@
   transition:
     opacity 250ms ease,
     transform 250ms ease;
+  /* simple-icons renders a <title>, which the browser would show as a native
+     tooltip over our own label. Hover is handled by .cloud-item instead. */
+  pointer-events: none;
+}
+
+/* Real brand colors, pulled back toward the current theme's foreground so
+   near-black logos stay visible on gruvbox dark and pale ones on light. */
+.cloud-brand {
+  color: color-mix(in oklab, var(--brand) 72%, var(--ink) 28%);
 }
 
 .cloud-item:hover .cloud-glyph {

@@ -2,63 +2,88 @@ import {
   Atom,
   Binary,
   Blocks,
-  BookOpen,
   Bot,
+  Boxes,
   Brain,
   BrainCircuit,
   ChartNetwork,
   Cloud,
   FlaskConical,
   Languages,
-  Leaf,
   MessageSquare,
   Network,
-  Boxes,
   ScanEye,
   ShieldCheck,
   Sigma,
   Sparkles,
   Split,
-  Swords,
   Target,
-  Volleyball,
-  Waves,
 } from 'lucide-react'
 import {
   SiBlockchaindotcom,
-  SiChessdotcom,
+  SiBlockchaindotcomHex,
   SiCplusplus,
+  SiCplusplusHex,
   SiCss,
+  SiCssHex,
   SiDatadog,
+  SiDatadogHex,
   SiDjango,
+  SiDjangoHex,
   SiDocker,
+  SiDockerHex,
   SiExpress,
+  SiExpressHex,
   SiFastify,
+  SiFastifyHex,
   SiFlask,
+  SiFlaskHex,
   SiGit,
+  SiGitHex,
   SiGithubactions,
+  SiGithubactionsHex,
   SiHtml5,
+  SiHtml5Hex,
   SiHuggingface,
+  SiHuggingfaceHex,
   SiJavascript,
+  SiJavascriptHex,
   SiLangchain,
+  SiLangchainHex,
   SiLinux,
+  SiLinuxHex,
   SiMongodb,
+  SiMongodbHex,
   SiNestjs,
+  SiNestjsHex,
   SiNodedotjs,
+  SiNodedotjsHex,
   SiOpenjdk,
+  SiOpenjdkHex,
   SiPostgresql,
+  SiPostgresqlHex,
   SiPytorch,
+  SiPytorchHex,
   SiPython,
+  SiPythonHex,
   SiReact,
+  SiReactHex,
   SiRedis,
+  SiRedisHex,
   SiTensorflow,
+  SiTensorflowHex,
   SiTypescript,
+  SiTypescriptHex,
 } from '@icons-pack/react-simple-icons'
 import type { IconComponent } from './content'
 
 /**
- * The floating side clouds. Each category gets one gruvbox hue so the two
- * gutters read as a soft, colored mist rather than a legend of logos.
+ * The floating side clouds.
+ *
+ * Three kinds of item:
+ *   - brand logos, drawn in their real colors (`color`)
+ *   - lucide glyphs for concepts, tinted with the category hue
+ *   - emoji, where neither library has anything honest to offer
  */
 export type CloudCategory = 'lang' | 'ai' | 'infra' | 'research' | 'personal'
 
@@ -72,9 +97,12 @@ export const CATEGORY_COLOR: Record<CloudCategory, string> = {
 
 export type CloudItem = {
   label: string
-  Icon: IconComponent
   category: CloudCategory
-  /** Overrides the category hue when the icon reads better in its own color. */
+  /** A lucide or simple-icons component. Omit when using `emoji`. */
+  Icon?: IconComponent
+  /** Rendered instead of `Icon` when no glyph does the thing justice. */
+  emoji?: string
+  /** Brand hex. Falls back to the category hue when absent. */
   color?: string
 }
 
@@ -84,26 +112,56 @@ export type CloudItem = {
  */
 export const cloudItems: CloudItem[] = [
   // Programming & web
-  { label: 'Python', Icon: SiPython, category: 'lang' },
-  { label: 'TypeScript', Icon: SiTypescript, category: 'lang' },
-  { label: 'JavaScript', Icon: SiJavascript, category: 'lang' },
-  { label: 'Java', Icon: SiOpenjdk, category: 'lang' },
-  { label: 'C++', Icon: SiCplusplus, category: 'lang' },
-  { label: 'React', Icon: SiReact, category: 'lang' },
-  { label: 'Node.js', Icon: SiNodedotjs, category: 'lang' },
-  { label: 'Express', Icon: SiExpress, category: 'lang' },
-  { label: 'NestJS', Icon: SiNestjs, category: 'lang' },
-  { label: 'Django', Icon: SiDjango, category: 'lang' },
-  { label: 'Flask', Icon: SiFlask, category: 'lang' },
-  { label: 'Fastify', Icon: SiFastify, category: 'lang' },
-  { label: 'HTML', Icon: SiHtml5, category: 'lang' },
-  { label: 'CSS', Icon: SiCss, category: 'lang' },
+  { label: 'Python', Icon: SiPython, category: 'lang', color: SiPythonHex },
+  {
+    label: 'TypeScript',
+    Icon: SiTypescript,
+    category: 'lang',
+    color: SiTypescriptHex,
+  },
+  {
+    label: 'JavaScript',
+    Icon: SiJavascript,
+    category: 'lang',
+    color: SiJavascriptHex,
+  },
+  { label: 'Java', Icon: SiOpenjdk, category: 'lang', color: SiOpenjdkHex },
+  { label: 'C++', Icon: SiCplusplus, category: 'lang', color: SiCplusplusHex },
+  { label: 'React', Icon: SiReact, category: 'lang', color: SiReactHex },
+  {
+    label: 'Node.js',
+    Icon: SiNodedotjs,
+    category: 'lang',
+    color: SiNodedotjsHex,
+  },
+  { label: 'Express', Icon: SiExpress, category: 'lang', color: SiExpressHex },
+  { label: 'NestJS', Icon: SiNestjs, category: 'lang', color: SiNestjsHex },
+  { label: 'Django', Icon: SiDjango, category: 'lang', color: SiDjangoHex },
+  { label: 'Flask', Icon: SiFlask, category: 'lang', color: SiFlaskHex },
+  { label: 'Fastify', Icon: SiFastify, category: 'lang', color: SiFastifyHex },
+  { label: 'HTML', Icon: SiHtml5, category: 'lang', color: SiHtml5Hex },
+  { label: 'CSS', Icon: SiCss, category: 'lang', color: SiCssHex },
 
   // AI / ML
-  { label: 'PyTorch', Icon: SiPytorch, category: 'ai' },
-  { label: 'TensorFlow', Icon: SiTensorflow, category: 'ai' },
-  { label: 'Hugging Face', Icon: SiHuggingface, category: 'ai' },
-  { label: 'LangChain', Icon: SiLangchain, category: 'ai' },
+  { label: 'PyTorch', Icon: SiPytorch, category: 'ai', color: SiPytorchHex },
+  {
+    label: 'TensorFlow',
+    Icon: SiTensorflow,
+    category: 'ai',
+    color: SiTensorflowHex,
+  },
+  {
+    label: 'Hugging Face',
+    Icon: SiHuggingface,
+    category: 'ai',
+    color: SiHuggingfaceHex,
+  },
+  {
+    label: 'LangChain',
+    Icon: SiLangchain,
+    category: 'ai',
+    color: SiLangchainHex,
+  },
   { label: 'Machine Learning', Icon: Brain, category: 'ai' },
   { label: 'Deep Learning', Icon: BrainCircuit, category: 'ai' },
   { label: 'Generative AI', Icon: Sparkles, category: 'ai' },
@@ -114,60 +172,95 @@ export const cloudItems: CloudItem[] = [
   { label: 'Reinforcement Learning', Icon: Target, category: 'ai' },
 
   // Data / infrastructure
-  { label: 'MongoDB', Icon: SiMongodb, category: 'infra' },
-  { label: 'PostgreSQL', Icon: SiPostgresql, category: 'infra' },
-  { label: 'Redis', Icon: SiRedis, category: 'infra' },
+  { label: 'MongoDB', Icon: SiMongodb, category: 'infra', color: SiMongodbHex },
+  {
+    label: 'PostgreSQL',
+    Icon: SiPostgresql,
+    category: 'infra',
+    color: SiPostgresqlHex,
+  },
+  { label: 'Redis', Icon: SiRedis, category: 'infra', color: SiRedisHex },
   { label: 'AWS', Icon: Cloud, category: 'infra' },
-  { label: 'Docker', Icon: SiDocker, category: 'infra' },
-  { label: 'Git', Icon: SiGit, category: 'infra' },
-  { label: 'Linux', Icon: SiLinux, category: 'infra' },
-  { label: 'CI/CD', Icon: SiGithubactions, category: 'infra' },
-  { label: 'Datadog', Icon: SiDatadog, category: 'infra' },
+  { label: 'Docker', Icon: SiDocker, category: 'infra', color: SiDockerHex },
+  { label: 'Git', Icon: SiGit, category: 'infra', color: SiGitHex },
+  { label: 'Linux', Icon: SiLinux, category: 'infra', color: SiLinuxHex },
+  {
+    label: 'CI/CD',
+    Icon: SiGithubactions,
+    category: 'infra',
+    color: SiGithubactionsHex,
+  },
+  { label: 'Datadog', Icon: SiDatadog, category: 'infra', color: SiDatadogHex },
 
   // Research
   { label: 'Federated Learning', Icon: Network, category: 'research' },
   { label: 'Split Learning', Icon: Split, category: 'research' },
   { label: 'Distributed AI', Icon: ChartNetwork, category: 'research' },
-  { label: 'Blockchain', Icon: SiBlockchaindotcom, category: 'research' },
+  {
+    label: 'Blockchain',
+    Icon: SiBlockchaindotcom,
+    category: 'research',
+    color: SiBlockchaindotcomHex,
+  },
   { label: 'Hyperledger Fabric', Icon: Blocks, category: 'research' },
   { label: 'Privacy-Preserving AI', Icon: ShieldCheck, category: 'research' },
   { label: 'Synthetic Data', Icon: FlaskConical, category: 'research' },
   { label: 'Distributed Systems', Icon: Boxes, category: 'research' },
 
-  // Personal
-  { label: 'Canada', Icon: Leaf, category: 'personal', color: 'text-gv-red' },
-  { label: 'Basketball', Icon: Volleyball, category: 'personal' },
-  { label: 'Chess', Icon: SiChessdotcom, category: 'personal' },
-  { label: 'Brazilian Jiu-Jitsu', Icon: Swords, category: 'personal' },
-  { label: 'Swimming', Icon: Waves, category: 'personal' },
-  { label: 'Reading', Icon: BookOpen, category: 'personal' },
+  // Personal — emoji where no icon set has an honest answer.
+  { label: 'Canada', emoji: '🇨🇦', category: 'personal' },
+  { label: 'Basketball', emoji: '🏀', category: 'personal' },
+  { label: 'Chess', emoji: '♟️', category: 'personal' },
+  { label: 'Brazilian Jiu-Jitsu', emoji: '🥋', category: 'personal' },
+  { label: 'Swimming', emoji: '🏊', category: 'personal' },
+  { label: 'Reading', emoji: '📚', category: 'personal' },
   { label: 'AI', Icon: Atom, category: 'personal' },
   { label: 'Computer Science', Icon: Binary, category: 'personal' },
   { label: 'Mathematics', Icon: Sigma, category: 'personal' },
 
   // Repeats — the ones worth seeing more than once.
-  { label: 'Python', Icon: SiPython, category: 'lang' },
-  { label: 'Python', Icon: SiPython, category: 'lang' },
-  { label: 'TypeScript', Icon: SiTypescript, category: 'lang' },
-  { label: 'TypeScript', Icon: SiTypescript, category: 'lang' },
-  { label: 'React', Icon: SiReact, category: 'lang' },
-  { label: 'React', Icon: SiReact, category: 'lang' },
-  { label: 'PyTorch', Icon: SiPytorch, category: 'ai' },
-  { label: 'PyTorch', Icon: SiPytorch, category: 'ai' },
+  { label: 'Python', Icon: SiPython, category: 'lang', color: SiPythonHex },
+  { label: 'Python', Icon: SiPython, category: 'lang', color: SiPythonHex },
+  {
+    label: 'TypeScript',
+    Icon: SiTypescript,
+    category: 'lang',
+    color: SiTypescriptHex,
+  },
+  {
+    label: 'TypeScript',
+    Icon: SiTypescript,
+    category: 'lang',
+    color: SiTypescriptHex,
+  },
+  { label: 'React', Icon: SiReact, category: 'lang', color: SiReactHex },
+  { label: 'React', Icon: SiReact, category: 'lang', color: SiReactHex },
+  { label: 'PyTorch', Icon: SiPytorch, category: 'ai', color: SiPytorchHex },
+  { label: 'PyTorch', Icon: SiPytorch, category: 'ai', color: SiPytorchHex },
   { label: 'AI', Icon: Atom, category: 'personal' },
   { label: 'AI', Icon: Atom, category: 'personal' },
-  { label: 'MongoDB', Icon: SiMongodb, category: 'infra' },
-  { label: 'MongoDB', Icon: SiMongodb, category: 'infra' },
-  { label: 'PostgreSQL', Icon: SiPostgresql, category: 'infra' },
-  { label: 'PostgreSQL', Icon: SiPostgresql, category: 'infra' },
-  { label: 'Basketball', Icon: Volleyball, category: 'personal' },
-  { label: 'Basketball', Icon: Volleyball, category: 'personal' },
-  { label: 'Docker', Icon: SiDocker, category: 'infra' },
-  { label: 'Linux', Icon: SiLinux, category: 'infra' },
-  { label: 'Git', Icon: SiGit, category: 'infra' },
+  { label: 'MongoDB', Icon: SiMongodb, category: 'infra', color: SiMongodbHex },
+  { label: 'MongoDB', Icon: SiMongodb, category: 'infra', color: SiMongodbHex },
+  {
+    label: 'PostgreSQL',
+    Icon: SiPostgresql,
+    category: 'infra',
+    color: SiPostgresqlHex,
+  },
+  {
+    label: 'PostgreSQL',
+    Icon: SiPostgresql,
+    category: 'infra',
+    color: SiPostgresqlHex,
+  },
+  { label: 'Basketball', emoji: '🏀', category: 'personal' },
+  { label: 'Basketball', emoji: '🏀', category: 'personal' },
+  { label: 'Docker', Icon: SiDocker, category: 'infra', color: SiDockerHex },
+  { label: 'Linux', Icon: SiLinux, category: 'infra', color: SiLinuxHex },
+  { label: 'Git', Icon: SiGit, category: 'infra', color: SiGitHex },
   { label: 'Machine Learning', Icon: Brain, category: 'ai' },
   { label: 'Deep Learning', Icon: BrainCircuit, category: 'ai' },
   { label: 'LLMs', Icon: MessageSquare, category: 'ai' },
-  { label: 'Chess', Icon: SiChessdotcom, category: 'personal' },
+  { label: 'Chess', emoji: '♟️', category: 'personal' },
   { label: 'Mathematics', Icon: Sigma, category: 'personal' },
 ]

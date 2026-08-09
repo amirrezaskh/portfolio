@@ -21,7 +21,7 @@ const DEPTH_X = [7, 18]
 const DEPTH_Y = [5, 13]
 
 function CloudIcon({ item, side }: { item: PlacedItem; side: Side }) {
-  const { Icon, label, category, color } = item
+  const { Icon, emoji, label, category, color } = item
 
   const position: CSSProperties = {
     top: `${item.top}%`,
@@ -34,6 +34,7 @@ function CloudIcon({ item, side }: { item: PlacedItem; side: Side }) {
     '--rot': `${item.rotate}deg`,
     '--scl': item.scale,
     '--opa': item.opacity,
+    ...(color ? { '--brand': color } : null),
   } as CSSProperties
 
   return (
@@ -54,9 +55,19 @@ function CloudIcon({ item, side }: { item: PlacedItem; side: Side }) {
           className="cloud-item pointer-events-auto relative cursor-default"
           style={glyph}
         >
-          <Icon
-            className={`cloud-glyph size-6 ${color ?? CATEGORY_COLOR[category]}`}
-          />
+          {emoji ? (
+            <span className="cloud-glyph block size-6 text-center text-[1.25rem] leading-6">
+              {emoji}
+            </span>
+          ) : (
+            Icon && (
+              <Icon
+                className={`cloud-glyph size-6 ${
+                  color ? 'cloud-brand' : CATEGORY_COLOR[category]
+                }`}
+              />
+            )
+          )}
           <span className="cloud-label absolute top-full left-1/2 mt-1.5 -translate-x-1/2 rounded bg-canvas/90 px-1.5 py-0.5 font-mono text-[10px] whitespace-nowrap text-ink-muted">
             {label}
           </span>
