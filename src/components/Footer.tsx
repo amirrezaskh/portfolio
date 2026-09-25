@@ -6,7 +6,7 @@ export function Footer() {
       {/* Trailing comment at the end of the file. */}
       <p className="font-mono text-xs text-ink-faint">
         <span className="select-none">{'// '}</span>© {new Date().getFullYear()}{' '}
-        {profile.name} · built with react, tailwind &amp; gruvbox
+        {profile.name}
       </p>
     </footer>
   )

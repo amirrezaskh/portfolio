@@ -12,13 +12,14 @@ export type IconComponent = ComponentType<{ className?: string }>
 
 export const profile = {
   name: 'Amirreza Sokhankhosh',
-  role: 'Software Engineer',
-  location: 'Winnipeg, Canada',
-  photo: '/me.JPEG',
+  role: 'Machine Learning Engineer',
+  location: 'Toronto, Canada',
+  photo: '/portrait.jpg',
   email: 'amirreza.sokhankhosh@gmail.com',
   resumeUrl: '#',
   intro:
-    'One or two sentences on what I build and what I care about. Keep it short — this is the first thing anyone reads.',
+    `Software Engineer specialized in ML, Gen AI, and distributed AI. Experienced in building production-scale AI
+applications, model training, and developing scalable ML infrastructure for enterprise and research environments.`,
   about: [
     'A paragraph with more room. What I work on day to day, the kinds of problems I like, and the tools I reach for first.',
     'A second paragraph for background — where I studied, what I did before, and anything that explains how I got here.',
@@ -32,11 +33,11 @@ export type Social = {
 }
 
 export const socials: Social[] = [
-  { label: 'GitHub', href: 'https://github.com/', icon: GithubIcon },
-  { label: 'LinkedIn', href: 'https://linkedin.com/', icon: LinkedinIcon },
+  { label: 'GitHub', href: 'https://github.com/amirrezaskh', icon: GithubIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/amirrezaskh/', icon: LinkedinIcon },
   {
     label: 'Google Scholar',
-    href: 'https://scholar.google.com/',
+    href: 'https://scholar.google.ca/citations?user=yRG4JwEAAAAJ&hl=en',
     icon: GraduationCap,
   },
 ]
@@ -52,29 +53,30 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    role: 'Software Engineer',
-    company: 'Company Name',
-    href: '#',
-    period: '2024 — Present',
+    role: 'Machine Learning Engineer',
+    company: 'Layer 6 AI, TD',
+    href: 'https://www.linkedin.com/company/layer-6-ai/',
+    period: 'Sep 2026 — Present',
     summary:
-      'One line on the scope of the work and the thing you are most proud of shipping.',
-    tags: ['TypeScript', 'React', 'Postgres'],
+      '',
+    tags: [],
+  },
+  {
+    role: 'Senior Software Engineer',
+    company: 'STAN AI',
+    href: 'https://www.linkedin.com/company/stanai/',
+    period: 'Nov 2025 — Sep 2025',
+    summary:
+      '',
+    tags: ['Typescript', 'MongoDB', 'AWS'],
   },
   {
     role: 'Research Assistant',
-    company: 'University Lab',
-    href: '#',
-    period: '2022 — 2024',
-    summary:
-      'What the research was about and what came out of it — a paper, a system, a result.',
-    tags: ['Python', 'Distributed Systems'],
-  },
-  {
-    role: 'Software Engineering Intern',
-    company: 'Earlier Company',
-    period: 'Summer 2021',
-    summary: 'A short line about what you owned during the internship.',
-    tags: ['Go', 'Docker'],
+    company: 'TCDT, University of Manitoba',
+    href: 'https://tcdt.ca/',
+    period: 'Sep 2023 - Sep 2025',
+    summary: '',
+    tags: ['Hyperledger Fabric', 'PyTorch', 'TensorFlow'],
   },
 ]
 
@@ -91,38 +93,30 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: 'Project One',
+    name: 'Aria',
     description:
-      'What it does in a sentence, and why it was interesting to build.',
+      `AI-powered resume and cover letter generator with Chrome extension integration, vector similarity search, and intelligent job matching using OpenAI and LangChain`,
     year: '2025',
-    tags: ['React', 'Vite'],
-    href: '#',
-    repoUrl: 'https://github.com/',
-    liveUrl: '#',
+    tags: ['Langchain', 'RAG', 'ChromaDB'],
+    // href: '#',
+    repoUrl: 'https://github.com/amirrezaskh/Aria',
+    // liveUrl: '#',
   },
   {
-    name: 'Project Two',
-    description: 'A second project. Same shape, different problem.',
+    name: 'BPFL',
+    description: `Blockchain-enabled Personalized Federated Learning framework combining PyTorch, Hyperledger Fabric, and incentive mechanisms for decentralized ML with 38 experimental configurations across multiple datasets.`,
+    year: '2025',
+    tags: ['Blockchain', 'Distributed Learning'],
+    // href: '#',
+    repoUrl: 'https://github.com/amirrezaskh/BPFL',
+  },
+  {
+    name: 'Digital Twin',
+    description: `Blockchain-enabled federated learning system for smart building Digital Twins using Hyperledger Fabric and Temporal Fusion Transformers. Privacy-preserving IoT sensor prediction across 76 rooms with decentralized AI training.`,
     year: '2024',
-    tags: ['Python', 'FastAPI'],
-    href: '#',
-    repoUrl: 'https://github.com/',
-  },
-  {
-    name: 'Project Three',
-    description: 'Something smaller — a tool, a script, a weekend experiment.',
-    year: '2024',
-    tags: ['Rust'],
-    href: '#',
-    repoUrl: 'https://github.com/',
-  },
-  {
-    name: 'Project Four',
-    description: 'Round out the grid so the layout reads evenly.',
-    year: '2023',
-    tags: ['TypeScript'],
-    href: '#',
-    liveUrl: '#',
+    tags: ['Temporal Fusion Transformers'],
+    // href: '#',
+    repoUrl: 'https://github.com/amirrezaskh/DigitalTwin',
   },
 ]
 
@@ -136,24 +130,10 @@ export type Post = {
 
 export const posts: Post[] = [
   {
-    title: 'The title of a post you have written',
-    date: 'Jul 2026',
-    readingTime: '6 min',
+    title: 'Mafia and Reinforcement Learning',
+    date: 'Aug 2026',
+    readingTime: '10 min',
     excerpt: 'A one-line hook that makes the title worth clicking.',
-    href: '#',
-  },
-  {
-    title: 'Another post, on something you learned',
-    date: 'Apr 2026',
-    readingTime: '4 min',
-    excerpt: 'Short enough to scan, specific enough to be interesting.',
-    href: '#',
-  },
-  {
-    title: 'A third, older post',
-    date: 'Nov 2025',
-    readingTime: '9 min',
-    excerpt: 'Keep the three or four most recent here and link out to the rest.',
     href: '#',
   },
 ]
@@ -163,5 +143,5 @@ export const sections = [
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'writing', label: 'Writing' },
-  { id: 'contact', label: 'Contact' },
+  // { id: 'contact', label: 'Contact' },
 ] as const

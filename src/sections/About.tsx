@@ -48,13 +48,13 @@ export function About() {
           </div>
         </div>
 
-        {/* Portrait is cropped from the top so the frame keeps the face. */}
+        {/* Source is pre-cropped to 2:3, so object-cover has nothing to trim. */}
         <img
           src={profile.photo}
           alt={profile.name}
-          width={240}
-          height={300}
-          className="aspect-4/5 w-40 shrink-0 rounded-xl border border-line object-cover object-top sm:w-48 md:w-60"
+          width={600}
+          height={900}
+          className="aspect-2/3 w-40 shrink-0 rounded-xl border border-line object-cover sm:w-48 md:w-56"
         />
       </div>
 

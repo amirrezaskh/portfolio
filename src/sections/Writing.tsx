@@ -18,7 +18,7 @@ export function Writing() {
         </a>
       }
     >
-      <ul className="divide-y divide-line border-y border-line">
+      <ul className="divide-y divide-line border-t border-line">
         {posts.map((post) => (
           <li key={post.title}>
             <a

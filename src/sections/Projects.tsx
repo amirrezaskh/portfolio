@@ -12,7 +12,7 @@ export function Projects() {
       icon={FolderGit2}
       action={
         <a
-          href="#"
+          href="https://github.com/amirrezaskh"
           className="inline-flex items-center gap-1 font-mono text-sm text-ink-faint transition-colors hover:text-gv-blue"
         >
           all projects

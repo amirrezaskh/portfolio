@@ -5,7 +5,7 @@ import { About } from '../sections/About'
 import { Experience } from '../sections/Experience'
 import { Projects } from '../sections/Projects'
 import { Writing } from '../sections/Writing'
-import { Contact } from '../sections/Contact'
+// import { Contact } from '../sections/Contact'
 
 export function Home() {
   return (
@@ -19,7 +19,7 @@ export function Home() {
         <Experience />
         <Projects />
         <Writing />
-        <Contact />
+        {/* <Contact /> */}
         <Footer />
       </main>
     </div>
